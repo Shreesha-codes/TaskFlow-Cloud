@@ -1,0 +1,113 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TaskBoard Cloud API",
+    "version": "1.0.0",
+    "description": "Production-ready MERN DevOps Capstone REST API with Health, Readiness, Prometheus Metrics and Task Management"
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Current Environment"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Liveness Probe",
+        "description": "Cheap endpoint returning 200 OK if Node process is responsive",
+        "responses": {
+          "200": { "description": "Process is healthy" }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "summary": "Readiness Probe",
+        "description": "Verifies MongoDB connection state before Kubernetes sends traffic",
+        "responses": {
+          "200": { "description": "Application and DB ready" },
+          "503": { "description": "Dependencies unavailable" }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Prometheus Metrics",
+        "description": "Exposes standard and custom Prometheus metrics for scraping",
+        "responses": {
+          "200": { "description": "Prometheus text formatted metrics" }
+        }
+      }
+    },
+    "/api/tasks": {
+      "get": {
+        "summary": "Get all tasks",
+        "parameters": [
+          { "name": "status", "in": "query", "schema": { "type": "string" } },
+          { "name": "priority", "in": "query", "schema": { "type": "string" } },
+          { "name": "search", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "List of tasks" }
+        }
+      },
+      "post": {
+        "summary": "Create a task",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title"],
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "status": { "type": "string", "enum": ["backlog", "todo", "in_progress", "review", "done"] },
+                  "priority": { "type": "string", "enum": ["low", "medium", "high", "urgent"] },
+                  "assignee": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Task created" }
+        }
+      }
+    },
+    "/api/tasks/stats": {
+      "get": {
+        "summary": "Get task KPI statistics",
+        "responses": {
+          "200": { "description": "Aggregated metrics" }
+        }
+      }
+    },
+    "/api/tasks/{id}": {
+      "get": {
+        "summary": "Get task by ID",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "Task details" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "put": {
+        "summary": "Update task",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "Task updated" }
+        }
+      },
+      "delete": {
+        "summary": "Delete task",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "Task removed" }
+        }
+      }
+    }
+  }
+}
