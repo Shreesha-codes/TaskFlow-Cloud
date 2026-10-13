@@ -98,10 +98,11 @@ export default function App() {
       const latency = Math.round(performance.now() - start);
 
       if (healthRes.ok) {
+        const healthData = await healthRes.json();
         const readyData = await readyRes.json();
         setSystemHealth({
           status: 'HEALTHY',
-          uptime: (await healthRes.json()).uptimeSeconds || 0,
+          uptime: healthData.uptimeSeconds || 0,
           dbStatus: readyData.status === 'READY' ? 'CONNECTED' : 'DISCONNECTED',
           latencyMs: latency,
         });
