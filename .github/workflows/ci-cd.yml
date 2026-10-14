@@ -76,46 +76,48 @@ jobs:
           load: true
           tags: taskboard-frontend:${{ github.sha }}
 
+      # Install Trivy CLI directly from official installer
+      - name: Install Trivy CLI
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+
       # Trivy Scan on Backend Image
       - name: Trivy Vulnerability Scanner - Backend
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: taskboard-backend:${{ github.sha }}
-          format: 'table'
-          exit-code: '0'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+        run: |
+          trivy image \
+            --format table \
+            --exit-code 0 \
+            --ignore-unfixed \
+            --vuln-type os,library \
+            --severity CRITICAL,HIGH \
+            taskboard-backend:${{ github.sha }}
 
       # Trivy Scan on Frontend Image
       - name: Trivy Vulnerability Scanner - Frontend
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: taskboard-frontend:${{ github.sha }}
-          format: 'table'
-          exit-code: '0'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+        run: |
+          trivy image \
+            --format table \
+            --exit-code 0 \
+            --ignore-unfixed \
+            --vuln-type os,library \
+            --severity CRITICAL,HIGH \
+            taskboard-frontend:${{ github.sha }}
 
-      # Upload Trivy Results as Artifact (SARIF format for GitHub Security tab)
-      - name: Generate Backend SARIF Report
-        uses: aquasecurity/trivy-action@0.28.0
+      # Generate SARIF reports for artifacts
+      - name: Generate Security SARIF Reports
         if: always()
-        with:
-          image-ref: taskboard-backend:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-backend-results.sarif'
-          severity: 'CRITICAL,HIGH'
+        run: |
+          trivy image \
+            --format sarif \
+            --output trivy-backend-results.sarif \
+            --severity CRITICAL,HIGH \
+            taskboard-backend:${{ github.sha }} || true
 
-      - name: Generate Frontend SARIF Report
-        uses: aquasecurity/trivy-action@0.28.0
-        if: always()
-        with:
-          image-ref: taskboard-frontend:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-frontend-results.sarif'
-          severity: 'CRITICAL,HIGH'
+          trivy image \
+            --format sarif \
+            --output trivy-frontend-results.sarif \
+            --severity CRITICAL,HIGH \
+            taskboard-frontend:${{ github.sha }} || true
 
       - name: Upload Security Scan Artifacts
         uses: actions/upload-artifact@v4
