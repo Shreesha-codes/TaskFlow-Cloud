@@ -1,0 +1,13 @@
+# Example Terraform variables configuration for TaskFlow Cloud EKS deployment
+# Copy this file to 'terraform.tfvars' and supply your preferred values.
+
+aws_region           = "ap-south-1"
+environment          = "production"
+cluster_name         = "taskboard-eks"
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+private_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
+node_instance_types  = ["t3.medium"]
+node_desired_size    = 2
+node_min_size        = 1
+node_max_size        = 4
