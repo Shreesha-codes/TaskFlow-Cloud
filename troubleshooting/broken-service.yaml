@@ -1,0 +1,17 @@
+# Lab Scenario 2: Service Selector Mismatch (0 Endpoints)
+# Problem: Service selector labels do not match pod deployment labels.
+# Goal: Investigate why requests fail via `kubectl get endpoints` and realign the labels.
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskboard-broken-service
+  namespace: taskboard
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    # BUG: Selector says 'app: non-existent-label' while actual pods have 'app: taskboard-backend'
+    app: non-existent-label

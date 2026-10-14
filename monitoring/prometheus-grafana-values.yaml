@@ -1,0 +1,75 @@
+# Prometheus Operator & Grafana Values Configuration for TaskFlow Cloud
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector:
+      matchLabels:
+        release: prometheus
+    scrapeInterval: 15s
+    evaluationInterval: 15s
+
+grafana:
+  enabled: true
+  adminPassword: "admin"
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: "default"
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+  dashboards:
+    default:
+      taskboard-dashboard:
+        json: |
+          {
+            "title": "TaskBoard Cloud Application Performance",
+            "panels": [
+              {
+                "title": "HTTP Request Rate (req/sec)",
+                "type": "timeseries",
+                "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+                "targets": [
+                  {
+                    "expr": "sum(rate(http_requests_total[1m])) by (method, route, status_code)"
+                  }
+                ]
+              },
+              {
+                "title": "HTTP Latency (95th Percentile Seconds)",
+                "type": "timeseries",
+                "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+                "targets": [
+                  {
+                    "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))"
+                  }
+                ]
+              },
+              {
+                "title": "Backend Pod CPU Utilization",
+                "type": "timeseries",
+                "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+                "targets": [
+                  {
+                    "expr": "sum(rate(container_cpu_usage_seconds_total{container=\"backend\"}[2m])) by (pod)"
+                  }
+                ]
+              },
+              {
+                "title": "HPA Current Replicas",
+                "type": "stat",
+                "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+                "targets": [
+                  {
+                    "expr": "kube_horizontalpodautoscaler_status_current_replicas{horizontalpodautoscaler=~\"taskboard-backend.*\"}"
+                  }
+                ]
+              }
+            ]
+          }

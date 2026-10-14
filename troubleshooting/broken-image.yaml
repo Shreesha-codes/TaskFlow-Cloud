@@ -1,0 +1,25 @@
+# Lab Scenario 1: ImagePullBackOff / ErrImagePull Simulation
+# Problem: Image tag refers to a non-existent version "v999.0.0-broken".
+# Goal: Inspect pod status using `kubectl describe pod` and fix the image tag.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskboard-broken-image
+  namespace: taskboard
+  labels:
+    app.kubernetes.io/name: taskboard-broken-image
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broken-image-demo
+  template:
+    metadata:
+      labels:
+        app: broken-image-demo
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/shreesha-codes/taskflow-cloud/backend:v999.0.0-broken
+          ports:
+            - containerPort: 8000
