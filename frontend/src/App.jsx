@@ -19,7 +19,8 @@ import {
   Terminal,
   ShieldCheck,
   Check,
-  X
+  X,
+  Cpu
 } from 'lucide-react';
 import './App.css';
 
