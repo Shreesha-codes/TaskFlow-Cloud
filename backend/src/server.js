@@ -13,12 +13,12 @@ const startServer = async () => {
 
   server = app.listen(PORT, () => {
     console.log(`===============================================`);
-    console.log(`🚀 TaskBoard Backend running on port ${PORT}`);
-    console.log(`📡 Health Check:  http://localhost:${PORT}/health`);
-    console.log(`🚦 Ready Check:   http://localhost:${PORT}/ready`);
-    console.log(`📊 Metrics:       http://localhost:${PORT}/metrics`);
-    console.log(`📖 Swagger Docs:  http://localhost:${PORT}/docs`);
-    console.log(`📋 API Tasks:     http://localhost:${PORT}/api/tasks`);
+    console.log(` TaskBoard Backend running on port ${PORT}`);
+    console.log(` Health Check:  http://localhost:${PORT}/health`);
+    console.log(` Ready Check:   http://localhost:${PORT}/ready`);
+    console.log(` Metrics:       http://localhost:${PORT}/metrics`);
+    console.log(` Swagger Docs:  http://localhost:${PORT}/docs`);
+    console.log(` API Tasks:     http://localhost:${PORT}/api/tasks`);
     console.log(`===============================================`);
   });
 };
