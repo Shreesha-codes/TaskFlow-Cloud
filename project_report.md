@@ -3,7 +3,7 @@
 **Project Name:** TaskFlow Cloud (TaskBoard MERN DevOps)  
 **Author:** Shreesha  
 **Repository:** [https://github.com/Shreesha-codes/TaskFlow-Cloud](https://github.com/Shreesha-codes/TaskFlow-Cloud)  
-**Evaluation Standard:** Session 21 DevOps Final Capstone Grading Rubric (100 Points)
+**Evaluation Standard:** Session 21 DevOps Final Capstone Grading Rubric 
 
 ---
 
@@ -21,7 +21,7 @@
 ---
 
 ## M1: Application (Frontend + Backend + Database)
-**Points: 10/10**
+
 
 ### Overview
 The core workload is a full-stack MERN task management application featuring a React-based frontend, a Node.js/Express RESTful backend, and MongoDB for persistent state management. The backend exposes full CRUD operations (`GET`, `POST`, `PUT`, `DELETE`) for sprint tasks alongside operational `/health`, `/ready`, and `/metrics` probe endpoints.
@@ -34,7 +34,7 @@ The application loads interactively in the web browser at `http://localhost:3000
 ---
 
 ## M2: Testing (Automated Testing + Code Quality)
-**Points: 10/10**
+
 
 ### Overview
 Automated regression tests are implemented using Jest and Supertest. The test suite isolates business logic and tests against an in-memory/mock database layer to ensure complete independence from live production databases. All core API endpoints and operational routes are validated prior to container packaging.
@@ -47,7 +47,7 @@ Execution of the test suite runs cleanly with 10 passing tests across 2 distinct
 ---
 
 ## M3: Git and GitHub
-**Points: 5/5**
+
 
 ### Overview
 All development follows professional Git practices. Changes are committed incrementally using conventional, semantic commit messages (`feat`, `fix`, `docs`, `chore`). A strict `.gitignore` safeguards secrets, `.env` files, build caches (`node_modules`), and Terraform state files from ever entering version control.
@@ -60,7 +60,7 @@ Commit history on the `main` branch showing at least 10 descriptive and well-str
 ---
 
 ## M4: Docker (Dockerfile + Compose)
-**Points: 10/10**
+
 
 ### Overview
 The stack is containerized for consistent runtime execution:
@@ -80,7 +80,7 @@ The stack is containerized for consistent runtime execution:
 ---
 
 ## M5: CI/CD (GitHub Actions Pipeline)
-**Points: 15/15**
+
 
 ### Overview
 An automated pipeline (`.github/workflows/ci-cd.yml`) triggers on every push to the `main` branch:
@@ -101,7 +101,7 @@ An automated pipeline (`.github/workflows/ci-cd.yml`) triggers on every push to 
 ---
 
 ## M6: DevSecOps (Trivy Security Scan)
-**Points: 5/5**
+
 
 ### Overview & Security Analysis
 During the automated CI/CD pipeline, the Aqua Security Trivy scanner analyzed both the backend and frontend container images for known vulnerabilities (CVEs) across both OS-level packages (Debian/Alpine base layers) and application dependencies (Node.js/npm libraries). The scan targeted `HIGH` and `CRITICAL` severity ratings with `--ignore-unfixed` enabled to surface actionable security risks. The scan completed successfully with 0 blocking critical vulnerabilities, confirming that the container base images and dependencies meet secure production baseline standards before being pushed to GHCR.
@@ -114,7 +114,7 @@ Terminal output from the Trivy pipeline step detailing zero unaddressed critical
 ---
 
 ## M7: Terraform (AWS Infrastructure as Code)
-**Points: 15/15**
+
 
 ### Overview
 Infrastructure as Code (IaC) is developed using Terraform to provision AWS cloud resources:
@@ -140,7 +140,7 @@ Infrastructure as Code (IaC) is developed using Terraform to provision AWS cloud
 ---
 
 ## M8: Kubernetes + Helm
-**Points: 15/15**
+
 
 ### Overview
 Production orchestration is managed via Kubernetes and packaged into a modular Helm chart (`helm/taskboard`):
@@ -161,7 +161,7 @@ Production orchestration is managed via Kubernetes and packaged into a modular H
 ---
 
 ## M9: Observability (Prometheus + Grafana)
-**Points: 10/10**
+
 
 ### Overview
 Full stack telemetry is integrated using the Prometheus Operator (`kube-prometheus-stack`):
