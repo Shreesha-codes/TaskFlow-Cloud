@@ -16,7 +16,7 @@
 - **Project Name:** TaskFlow Cloud (TaskBoard MERN DevOps)
 - **Repository:** [https://github.com/Shreesha-codes/TaskFlow-Cloud](https://github.com/Shreesha-codes/TaskFlow-Cloud)
 - **Comprehensive Project Report:** [project_report.md](https://github.com/Shreesha-codes/TaskFlow-Cloud/blob/main/project_report.md)
-- **System Architecture Specification:** [architecture.md](https://github.com/Shreesha-codes/TaskFlow-Cloud/blob/main/architecture.md)
+
 - **Project Presentation Deck (Google Slides / PPT):** [View Presentation on Google Drive](https://drive.google.com/file/d/1_4-4tk-R7lkkAdwa2xK-n49QL-jysc_z/view?usp=sharing)
 
 ---
