@@ -57,3 +57,9 @@ variable "node_max_size" {
   type        = number
   default     = 4
 }
+
+variable "availability_zones" {
+  description = "List of availability zones in the region"
+  type        = list(string)
+  default     = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
+}
