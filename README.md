@@ -218,9 +218,9 @@ terraform destroy
 ## Project Documentation & Deliverable Links
 
 1. **[Comprehensive Project Report (Evidence & Screenshots)](https://github.com/Shreesha-codes/TaskFlow-Cloud/blob/main/project_report.md)** — Contains verified screenshots, terminal outputs, and audit logs for Modules M1 through M9.
-2. **[System Architecture Specification](https://github.com/Shreesha-codes/TaskFlow-Cloud/blob/main/architecture.md)** — Architectural breakdowns with high-resolution Mermaid diagrams.
+
 3. **[Presentation Slides Deck](https://drive.google.com/file/d/1_4-4tk-R7lkkAdwa2xK-n49QL-jysc_z/view?usp=sharing)** — Complete slide-by-slide presentation deck.
-4. **[Grading Rubric](https://github.com/Shreesha-codes/TaskFlow-Cloud/blob/main/grading.md)** — Session 21 DevOps Final Capstone criteria and submission checklist.
+
 
 ---
 
