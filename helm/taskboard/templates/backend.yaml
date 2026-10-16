@@ -32,6 +32,8 @@ spec:
               value: "{{ .Values.backend.env.NODE_ENV }}"
             - name: MONGO_URI
               value: "{{ .Values.backend.env.MONGO_URI }}"
+            - name: MONGODB_URI
+              value: "{{ .Values.backend.env.MONGO_URI }}"
           livenessProbe:
             {{- toYaml .Values.backend.livenessProbe | nindent 12 }}
           readinessProbe:
